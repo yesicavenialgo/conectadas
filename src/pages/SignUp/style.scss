@@ -1,0 +1,83 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: rgb(190, 197, 254);
+  background: linear-gradient(
+    29deg,
+    rgba(190, 197, 254, 1) 26%,
+    rgba(195, 242, 202, 1) 67%,
+    rgba(246, 99, 170, 1) 100%
+  );
+}
+nav {
+  text-decoration: none;
+
+  .list-nav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: end;
+
+    .item-nav {
+      padding: 5px;
+      width: 100px;
+      background-color: #c3f2ca;
+      border-radius: 5px;
+    }
+
+    .link {
+      text-decoration: none;
+    }
+  }
+}
+.page-signUp {
+  margin: 0px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    text-align: center;
+    color: #c3f2ca;
+  }
+
+  .form-add-user {
+    margin: auto;
+    background-color: #f663aa;
+    color: rgb(205, 214, 214);
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: left;
+
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+
+    label {
+      font-size: 20px;
+      display: block;
+      margin: 10px;
+    }
+    input {
+      margin: 15px;
+      width: 280px;
+      height: 30px;
+      border: none;
+      border-radius: 15px;
+    }
+    button {
+      margin: 50px;
+      width: 200px;
+      height: 40px;
+      border-radius: 30px;
+      border: none;
+      background-color: #c3f2ca;
+    }
+  }
+}

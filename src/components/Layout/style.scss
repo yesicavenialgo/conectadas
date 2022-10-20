@@ -1,0 +1,65 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root,
+.app {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  background: rgb(190, 197, 254);
+  background: linear-gradient(
+    29deg,
+    rgba(190, 197, 254, 1) 26%,
+    rgba(195, 242, 202, 1) 67%,
+    rgba(246, 99, 170, 1) 100%
+  );
+}
+nav {
+  text-decoration: none;
+}
+.main {
+  margin: 0px;
+}
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  height: 50px;
+
+  color: azure;
+
+  h1 {
+    margin: 10px;
+  }
+}
+.footer {
+  margin: 0px;
+  height: 100px;
+
+  color: rgb(205, 214, 214);
+}
+
+.list-nav {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: end;
+
+  .item-nav {
+    margin: 5px;
+  }
+
+  .link {
+    color: azure;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+}
+main {
+  margin: 0;
+}
