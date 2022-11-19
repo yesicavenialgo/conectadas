@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { Button } from "../Button/button";
+
 import "./style.scss";
 
 const Layout = ({ children, className }) => {
@@ -16,31 +18,22 @@ const Layout = ({ children, className }) => {
             </NavLink>
           </li>
           <li className="item-nav">
-            <NavLink to="/Login" className="link">
-              Ingresar
+            <NavLink to="/SearchMovie" className="link">
+              Buscar Película
             </NavLink>
           </li>
           <li className="item-nav">
-            <NavLink to="/SignUp" className="link">
-              Registrarse
+            <NavLink to="/Profile" className="link">
+              Perfil
             </NavLink>
           </li>
           <li className="item-nav">
-            <NavLink to="/Friends" className="link">
-              Buscar amigos
-            </NavLink>
-          </li>
-          <li className="item-nav">
-            <NavLink to="/Logout" className="link">
-              Salir
-            </NavLink>
+            <Button />
           </li>
         </ul>
       </nav>
       <main className={className}>{children}</main>
-      <footer className="footer">
-        <h3> Footer</h3>
-      </footer>
+      <footer className="footer"></footer>
     </>
   );
 };

@@ -1,19 +1,28 @@
-import { Layout } from "../../components";
+import { useState, useEffect } from "react";
+import { usersApi } from "../../api";
 
 const Friends = () => {
-  const searchFriend = (e) => {
-    e.preventDefault();
-  };
+  const [listUsers, setListUsers] = useState([]);
 
+  const handleSubmit = () => {
+    "aca van los usuarios que se decidió seguir";
+  };
+  useEffect(() => {
+    usersApi.getAll().then((user) => {
+      setListUsers(user);
+    });
+  }, []);
   return (
-    <Layout>
-      <main className="page friends">
-        <div className="">
-          <input type="text" name="searchFriend" onSubmit={searchFriend} />
-          <button type="submit">Buscar</button>
-        </div>
-      </main>
-    </Layout>
+    <div>
+      {listUsers.map((user) => {
+        return (
+          <div key={user.id}>
+            <h3>{user.nam}</h3>
+            <button onClick={handleSubmit()}>Seguir</button>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

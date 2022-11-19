@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
+import { withAuth } from "../../hoc/whitAuth";
 import { useAuth } from "../../hooks/useAuth";
+import { validationSchema } from "./validationSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 import "./style.scss";
 
-const inicialData = {
+const defaultValues = {
   email: "",
   pass: "",
 };
 
-const Login = () => {
-  const [formData, setFormData] = useState(inicialData);
+const LoginPage = () => {
+  const { register, handleSubmit, formState } = useForm({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+  });
 
   const { login } = useAuth();
 
-  const onSubmit = (formData) => {
-    login(formData);
+  const logged = (data) => {
+    login(data);
   };
 
   return (
@@ -36,41 +42,33 @@ const Login = () => {
       </nav>
       <main className="page-login">
         <div className="form-group">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSubmit(formData);
-            }}
-          >
+          <form className="form-login" onSubmit={handleSubmit(logged)}>
             <div className="">
               <label htmlFor="">Escriba su correo electrónico</label>
               <input
                 type="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    email: e.target.value,
-                  }))
-                }
+                placeholder="Escriba un correo electrónico"
+                {...register("email")}
               />
+              {formState.errors.email?.message}
             </div>
             <div className="">
               <label htmlFor="">Escriba su contraseña</label>
               <input
                 type="password"
-                name="password"
-                value={formData.pass}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    pass: e.target.value,
-                  }))
-                }
+                placeholder="Escriba su contraseña"
+                {...register("pass")}
               />
+              {formState.errors.pass?.message}
             </div>
-            <button type="submit">Enviar</button>
+            <button
+              type="submit"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              Enviar
+            </button>
           </form>
         </div>
       </main>
@@ -78,4 +76,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export const Login = withAuth(LoginPage);
