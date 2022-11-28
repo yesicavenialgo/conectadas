@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { usersApi } from "../../api";
-import "./style.scss";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const inicialData = {
+import "./style.scss";
+import { validationSchema } from "../Login/validationSchema";
+
+const defaultValues = {
   nam: "",
   lastname: "",
   birth: "",
@@ -14,9 +17,12 @@ const inicialData = {
 };
 
 const SignUp = () => {
-  const [formData, setFormData] = useState(inicialData);
+  const { register, handleSubmit, formState } = useForm({
+    defaultValues,
+    resolver: yupResolver(validationSchema),
+  });
 
-  const onSubmit = (formData) => {
+  const save = (formData) => {
     usersApi.add(formData);
   };
   return (
@@ -39,113 +45,51 @@ const SignUp = () => {
       <main className=" main page-signUp">
         <div>
           <h2>Registrarse</h2>
-          <form
-            className="form-add-user"
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSubmit(formData);
-            }}
-          >
+          <form className="form-add-user" onSubmit={handleSubmit(save)}>
             <div className="form-group">
               <label htmlFor="">Nombre</label>
-              <input
-                type="text"
-                name="nam"
-                value={formData.nam}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    nam: e.target.value,
-                  }))
-                }
-              />
+              <input type="text" {...register("nam")} />
+              {formState.errors.nam?.message}
             </div>
             <div className="form-group">
               <label htmlFor="">Apellido</label>
-              <input
-                type="text"
-                name=""
-                value={formData.lastname}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    lastname: e.target.value,
-                  }))
-                }
-              />
+              <input type="text" {...register("lastname")} />
+              {formState.errors.lastname?.message}
             </div>
             <div className="form-group">
               <label htmlFor="">Fecha de nacimiento</label>
-              <input
-                type="date"
-                name="birth"
-                value={formData.birth}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    birth: e.target.value,
-                  }))
-                }
-              />
+              <input type="date" {...register("birth")} />
+              {formState.errors.birth?.message}
             </div>
             <div className="form-group">
               <label htmlFor="">Ciudad</label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    city: e.target.value,
-                  }))
-                }
-              />
+              <input type="text" {...register("city")} />
+              {formState.errors.city?.message}
             </div>
             <div className="form-group">
               <label htmlFor="">País</label>
-              <input
-                type="text"
-                name="country"
-                value={formData.country}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    country: e.target.value,
-                  }))
-                }
-              />
+              <input type="text" {...register("country")} />
+              {formState.errors.country?.message}
             </div>
             <div className="form-group">
               <label htmlFor="">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    email: e.target.value,
-                  }))
-                }
-              />
+              <input type="email" {...register("email")} />
+              {formState.errors.email?.message}
             </div>
             <div className="form-group">
               <label htmlFor="">Contraseña</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.pass}
-                onChange={(e) =>
-                  setFormData((prevState) => ({
-                    ...prevState,
-                    pass: e.target.value,
-                  }))
-                }
-              />
+              <input type="password" {...register("pass")} />
+              {formState.errors.pass?.message}
             </div>
             <div>
-              <button type="submit">Enviar</button>
+              <button
+                type="submit"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                Enviar
+              </button>
             </div>
           </form>
         </div>

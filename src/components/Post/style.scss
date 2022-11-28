@@ -1,0 +1,47 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.containerPost {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  .cardPost {
+    background-color: #f4aed0;
+    color: rgba(1, 9, 9, 0.633);
+    width: 500px;
+    height: 300px;
+    align-items: center;
+    margin: 50px;
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  p {
+    font-size: 15px;
+  }
+  input {
+    margin-top: 10px;
+    border: none;
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  button {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    background-color: #c3f2ca;
+  }
+}

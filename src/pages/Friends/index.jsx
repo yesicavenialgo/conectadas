@@ -1,19 +1,43 @@
-import { Layout } from "../../components";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import "./style.scss";
 
 const Friends = () => {
-  const searchFriend = (e) => {
-    e.preventDefault();
+  const [listUsers, setListUsers] = useState([]);
+  const { me, follow, following } = useAuth();
+  const handleSubmit = (user) => {
+    following(user);
   };
 
+  useEffect(() => {
+    follow().then((user) => {
+      setListUsers(user);
+    });
+  }, []);
+
   return (
-    <Layout>
-      <main className="page friends">
-        <div className="">
-          <input type="text" name="searchFriend" onSubmit={searchFriend} />
-          <button type="submit">Buscar</button>
-        </div>
-      </main>
-    </Layout>
+    <>
+      <div>
+        <h3>Recomendado</h3>
+        {listUsers.map((user) => {
+          return (
+            <div key={user.id}>
+              <aside>
+                <label>{user.nam}</label>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit(user);
+                  }}
+                >
+                  Seguir
+                </button>
+              </aside>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
