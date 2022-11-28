@@ -1,28 +1,43 @@
 import { useState, useEffect } from "react";
-import { usersApi } from "../../api";
+import { useAuth } from "../../hooks/useAuth";
+import "./style.scss";
 
 const Friends = () => {
   const [listUsers, setListUsers] = useState([]);
-
-  const handleSubmit = () => {
-    "aca van los usuarios que se decidió seguir";
+  const { me, follow, following } = useAuth();
+  const handleSubmit = (user) => {
+    following(user);
   };
+
   useEffect(() => {
-    usersApi.getAll().then((user) => {
+    follow().then((user) => {
       setListUsers(user);
     });
   }, []);
+
   return (
-    <div>
-      {listUsers.map((user) => {
-        return (
-          <div key={user.id}>
-            <h3>{user.nam}</h3>
-            <button onClick={handleSubmit()}>Seguir</button>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div>
+        <h3>Recomendado</h3>
+        {listUsers.map((user) => {
+          return (
+            <div key={user.id}>
+              <aside>
+                <label>{user.nam}</label>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit(user);
+                  }}
+                >
+                  Seguir
+                </button>
+              </aside>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

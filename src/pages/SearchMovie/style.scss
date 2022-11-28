@@ -1,0 +1,49 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+input {
+  margin-top: 10px;
+  border: none;
+  width: 450px;
+  height: 40px;
+  border-radius: 10px;
+}
+.movies {
+  padding: 50px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .cardMovie {
+    background-color: #f4aed0;
+    color: rgba(1, 9, 9, 0.633);
+    width: 300px;
+    height: 500px;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+  }
+  img {
+    width: 100px;
+    height: 100px;
+  }
+  p {
+    padding: 15px;
+    font-size: 15px;
+  }
+  button {
+    margin-top: 20px;
+    margin-left: 10px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    background-color: #c3f2ca;
+  }
+}

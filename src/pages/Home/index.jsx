@@ -5,17 +5,23 @@ import { Post } from "../../components/Post/post";
 import { withAuth } from "../../hoc/whitAuth";
 import { useAuth } from "../../hooks/useAuth";
 import { Friends } from "../Friends";
-
 import "./style.scss";
 
 const inicialData = {
+  id: "",
+  date: "",
   nam: "",
+  lastname: "",
   title: "",
   description: "",
 };
 
 const HomePage = () => {
   const [formData, setFormData] = useState(inicialData);
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
   const [moviePost, setMoviePost] = useState([]);
   const { me } = useAuth();
 
@@ -24,10 +30,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    if (me) {
+    if ((me, date)) {
       setFormData((prevState) => ({
         ...prevState,
+        id: me.id,
         nam: me.nam,
+        lastname: me.lastname,
+        date: date.date,
       }));
     }
 
@@ -38,7 +47,7 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <main className="page home">
+      <main className="page-home">
         <div>
           <form
             className="form-add-post"
@@ -47,7 +56,7 @@ const HomePage = () => {
               onSubmit(formData);
             }}
           >
-            <div className="">
+            <div className="cardPostHome">
               <label htmlFor=""> ¿ Qué te gustaría compartirnos ?</label>
               <input
                 type="text"
@@ -73,8 +82,6 @@ const HomePage = () => {
                   }))
                 }
               />
-            </div>
-            <div>
               <button type="submit">Enviar</button>
             </div>
           </form>
@@ -82,10 +89,15 @@ const HomePage = () => {
         <div>
           <Post />
         </div>
-        <div>
+        <div className="cardMovies">
           {moviePost.map((movie) => {
             return (
-              <div key={movie.id}>
+              <div className="cardMovie" key={movie.id}>
+                <span>{movie.date}</span>
+                <h2>
+                  {movie.nam}
+                  {movie.lastname}
+                </h2>
                 <img
                   src={"http://image.tmdb.org/t/p/w500/" + movie.poster_path}
                   alt=""
@@ -97,7 +109,7 @@ const HomePage = () => {
             );
           })}
         </div>
-        <div>
+        <div className="follow">
           <Friends />
         </div>
       </main>

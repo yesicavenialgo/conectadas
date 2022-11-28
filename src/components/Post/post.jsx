@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { usersApi } from "../../api";
 
+import "./style.scss";
+
 const Post = () => {
   const [listaDePosts, setListaDePosts] = useState([]);
+
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
 
   useEffect(() => {
     usersApi.getPost().then((posts) => {
@@ -12,11 +19,15 @@ const Post = () => {
 
   return (
     <>
-      <div>
+      <div className="containerPost">
         {listaDePosts.map((post) => {
           return (
-            <div key={post.id}>
-              <h2>{post.nam}</h2>
+            <div className="cardPost" key={post.id}>
+              <span>{date}</span>
+              <h2>
+                {post.nam}
+                {post.lastname}
+              </h2>
               <h3>{post.title}</h3>
               <p> {post.description}</p>
               <input />
