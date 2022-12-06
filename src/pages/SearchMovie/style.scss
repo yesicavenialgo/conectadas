@@ -26,6 +26,10 @@ input {
     border-radius: 15px;
     border: none;
   }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
   img {
     width: 100px;
     height: 100px;

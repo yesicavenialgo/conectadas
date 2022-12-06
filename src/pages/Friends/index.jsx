@@ -4,7 +4,7 @@ import "./style.scss";
 
 const Friends = () => {
   const [listUsers, setListUsers] = useState([]);
-  const { me, follow, following } = useAuth();
+  const { follow, following } = useAuth();
   const handleSubmit = (user) => {
     following(user);
   };
