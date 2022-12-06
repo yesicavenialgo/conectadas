@@ -22,6 +22,7 @@ const HomePage = () => {
   const date = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
+
   const [moviePost, setMoviePost] = useState([]);
   const { me } = useAuth();
 
@@ -90,24 +91,30 @@ const HomePage = () => {
           <Post />
         </div>
         <div className="cardMovies">
-          {moviePost.map((movie) => {
-            return (
-              <div className="cardMovie" key={movie.id}>
-                <span>{movie.date}</span>
-                <h2>
-                  {movie.nam}
-                  {movie.lastname}
-                </h2>
-                <img
-                  src={"http://image.tmdb.org/t/p/w500/" + movie.poster_path}
-                  alt=""
-                />
+          <ul>
+            {moviePost.map((movie) => {
+              return (
+                <div className="cardMovie" key={movie.id}>
+                  <li>
+                    <span>{movie.date}</span>
+                    <h2>
+                      {movie.nam}
+                      {movie.lastname}
+                    </h2>
+                    <img
+                      src={
+                        "http://image.tmdb.org/t/p/w500/" + movie.poster_path
+                      }
+                      alt=""
+                    />
 
-                <h3>{movie.original_title}</h3>
-                <p>{movie.overview}</p>
-              </div>
-            );
-          })}
+                    <h3>{movie.original_title}</h3>
+                    <p>{movie.overview}</p>
+                  </li>
+                </div>
+              );
+            })}
+          </ul>
         </div>
         <div className="follow">
           <Friends />

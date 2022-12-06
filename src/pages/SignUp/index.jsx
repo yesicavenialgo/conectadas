@@ -2,9 +2,8 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { usersApi } from "../../api";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { validationSchema } from "./validationSchema";
 import "./style.scss";
-import { validationSchema } from "../Login/validationSchema";
 
 const defaultValues = {
   nam: "",

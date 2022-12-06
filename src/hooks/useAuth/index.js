@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { usersApi } from "../../api";
 import { AuthContext } from "../../contexts/auth";
 import { mapToArray } from "../../helpers";
@@ -54,6 +54,7 @@ const useAuth = () => {
     const postCard = postUsers.find(
       (post) => post.title === title && post.description === description
     );
+
     if (postCard) {
       return postCard;
     }
@@ -65,17 +66,11 @@ const useAuth = () => {
   const follow = async () => {
     const user = await usersApi.getAll();
 
-    if (user !== me) {
-      return mapToArray(user);
-    }
+    const follower = user.find((user) => user.id !== me.id);
+
+    return [follower];
   };
 
   return { me, login, logout, post, follow, following };
 };
 export { useAuth };
-
-// tenemos los ids de los usuarios a los que seguimos
-// tenemos todos los posts
-// > hacer una funcion que recorra cada uno de los ids de los usuarios a los que sigo
-// y por cada uno de esos ids, comprobar si algun post.usuario_id es igual al id del usuario
-// si el usuario.id es == post.usuario_id me guardo ese post en un array

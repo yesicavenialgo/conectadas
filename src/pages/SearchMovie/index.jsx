@@ -4,12 +4,11 @@ import { Layout } from "../../components";
 import { withAuth } from "../../hoc/whitAuth";
 import { useAuth } from "../../hooks/useAuth";
 import "./style.scss";
+
 const SearchMoviePage = () => {
   const [listMovies, setListMovies] = useState([]);
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
+
+  const date = new Date();
   const { me } = useAuth();
 
   const searchMovie = (e) => {
@@ -54,30 +53,35 @@ const SearchMoviePage = () => {
         </div>
 
         <div className="movies">
-          {listMovies && listMovies.length > 0
-            ? listMovies.map((movie) => {
-                return (
-                  <div className="cardMovie" key={movie.id}>
-                    <img
-                      src={
-                        "http://image.tmdb.org/t/p/w500/" + movie.poster_path
-                      }
-                      alt=""
-                    />
+          <ul>
+            {listMovies && listMovies.length > 0
+              ? listMovies.map((movie) => {
+                  return (
+                    <div className="cardMovie" key={movie.id}>
+                      <li>
+                        <img
+                          src={
+                            "http://image.tmdb.org/t/p/w500/" +
+                            movie.poster_path
+                          }
+                          alt=""
+                        />
 
-                    <h3>{movie.original_title}</h3>
-                    <p>{movie.overview}</p>
-                    <button
-                      onClick={() => {
-                        handleSubmit(movie);
-                      }}
-                    >
-                      Compartir
-                    </button>
-                  </div>
-                );
-              })
-            : ""}
+                        <h3>{movie.original_title}</h3>
+                        <p>{movie.overview}</p>
+                        <button
+                          onClick={() => {
+                            handleSubmit(movie);
+                          }}
+                        >
+                          Compartir
+                        </button>
+                      </li>
+                    </div>
+                  );
+                })
+              : ""}
+          </ul>
         </div>
       </main>
     </Layout>
